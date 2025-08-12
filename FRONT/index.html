@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Formulario -->
+    <div class="form-card">
+        <h1>Gestión de Clientes</h1>
+        <form id="mi-formulario">
+            <div class="form-group">
+                <input type="text" id="name" placeholder="Name" required/>
+                <input type="text" id="id_customer" placeholder="ID" required/>
+                <input type="text" id="address" placeholder="Address" required/>
+                <input type="phone" id="phone" placeholder="Phone Number" required/>
+                <input type="email" id="email" placeholder="Email" required/>
+            </div>
+            <div class="button-group">
+                <button type="button" class="action-btn edit" id="guardar-btn" onclick="saveUser()">Guardar</button>
+                <button type="button" class="action-btn delete" id="actualizar-btn" onclick="updateCustomer()">Actualizar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Tabla -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cedula</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="empleados-body"></tbody>
+        </table>
+    </div>
+
+    <div class="csv-section">
+        <h3>Carga Masiva de Usuarios</h3>
+        <div class="form-group">
+          <input type="file" id="csv-input" accept=".csv" />
+          <button onclick="uploadCSV()">Cargar CSV</button>
+        </div>
+      </div>
+
+    <script src="./api.js"></script>
+</body>
+</html>
