@@ -1,0 +1,63 @@
+CREATE DATABASE ExpertSoft;
+
+USE ExpertSoft;
+
+CREATE TABLE customer(
+
+id INT auto_increment primary key,
+name VARCHAR(150),
+id_customer VARCHAR(20),
+address VARCHAR (150),
+phone VARCHAR (15),
+email VARCHAR (100)
+);
+
+SELECT * FROM customer;
+
+INSERT INTO customer (name,id_customer,address,phone,email) VALUES ('Dawinzon', '1000565214', 'CAlle 23c', '3235805617', 'arleipolo15@gmail.com');
+
+CREATE TABLE TRANSACTIONS(
+id INT auto_increment primary key,
+date_and_time DATE,
+amount decimal,
+state VARCHAR (50),
+type_transaction VARCHAR (15),
+id_customer INT,
+platform VARCHAR (100),
+ FOREIGN KEY (id_customer) REFERENCES customer(id)
+);
+
+SELECT * FROM TRANSACTIONS;
+
+CREATE TABLE bill (
+id INT auto_increment primary key,
+number_bill varchar (150),
+billing_period date,
+amount_bill decimal,
+amount_paid decimal
+);
+
+ALTER TABLE bill ADD COLUMN id_transaction INT;
+
+ALTER TABLE bill
+ADD CONSTRAINT FK_transaction_customer
+FOREIGN KEY (id_transaction)
+REFERENCES TRANSACTIONS(id);
+
+
+INSERT INTO customer (name, id_customer, address, phone, email) VALUES
+( 'Juan Pérez', '1001', 'Calle 10 #15-20', '3001112233', 'juanperez@mail.com'),
+( 'María Gómez', '1002', 'Carrera 5 #8-50', '3012223344', 'mariagomez@mail.com'),
+( 'Carlos López', '1003', 'Av. Siempre Viva 742', '3023334455', 'carloslopez@mail.com');
+
+INSERT INTO TRANSACTIONS ( date_and_time, amount, state, type_transaction, id_customer, platform) VALUES
+('2025-08-01', 150000, 'Completada', 'Pago factura', 1, 'Nequi'),
+('2025-08-02', 200000, 'Completada', 'Pago factura', 1, 'Daviplata'),
+('2025-08-03', 50000, 'Completada', 'Pago parcial', 1, 'Nequi'),
+('2025-08-04', 180000, 'Pendiente', 'Pago factura', 1, 'Daviplata');
+
+INSERT INTO bill (number_bill, billing_period, amount_bill, amount_paid, id_customer, id_transaction) VALUES
+( 'FAC-001', '2025-07-01', 150000, 150000, 1, 13),
+( 'FAC-002', '2025-07-05', 200000, 200000, 1, 14),
+( 'FAC-003', '2025-07-10', 100000, 50000, 1, 15),
+( 'FAC-004', '2025-07-15', 180000, 1, 1, 16);
